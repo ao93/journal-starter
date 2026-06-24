@@ -1,9 +1,8 @@
 from datetime import UTC, datetime
+from typing import Annotated
 from uuid import uuid4
 
-from pydantic import BaseModel, Field
-from pydantic import StringConstraints
-from typing import Annotated, Optional
+from pydantic import BaseModel, Field, StringConstraints
 
 ValidatedStr = Annotated[
     str,
@@ -48,9 +47,9 @@ class EntryCreate(BaseModel):
 class EntryUpdate(BaseModel):
     """Model for updating a journal entry (all fields optional)."""
 
-    work: Optional[ValidatedStr] = None
-    struggle: Optional[ValidatedStr] = None
-    intention: Optional[ValidatedStr] = None
+    work: ValidatedStr | None = None
+    struggle: ValidatedStr | None = None
+    intention: ValidatedStr | None = None
 
 
 class Entry(BaseModel):

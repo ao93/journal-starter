@@ -4,7 +4,9 @@ from fastapi import FastAPI
 
 from api.routers.journal_router import router as journal_router
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
 
 logger = logging.getLogger(__name__)
 logger.info("Journal API starting up")
