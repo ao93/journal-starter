@@ -3,6 +3,7 @@
 import json
 
 from openai import AsyncOpenAI
+from openai.types.chat import ChatCompletionMessageParam
 
 from api.config import get_settings
 
@@ -25,7 +26,7 @@ async def analyze_journal_entry(
     if client is None:
         client = _default_client()
 
-    messages = [
+    messages: list[ChatCompletionMessageParam] = [
         {
             "role": "system",
             "content": (
@@ -48,6 +49,7 @@ async def analyze_journal_entry(
         messages=messages,
     )
 
-    result = json.loads(response.choices[0].message.content)
+    content = response.choices[0].message.content or ""
+    result = json.loads(content)
     result["entry_id"] = entry_id
     return result
